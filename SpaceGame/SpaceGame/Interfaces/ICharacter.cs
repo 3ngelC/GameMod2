@@ -9,8 +9,7 @@ namespace SpaceGame.Interfaces
 {
     public interface ICharacter
     {
-        string Name { get; }
-        string Description { get; }
-        Item[] Items { get; }
+        string Name { get; }        
+        List<Item> Items { get; }
     }
 }

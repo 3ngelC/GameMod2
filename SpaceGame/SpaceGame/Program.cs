@@ -7,20 +7,24 @@ using Spectre.Console;
 namespace SpaceGame
 {
     using SpaceGame.AnsiConsoleGame;
+    using SpaceGame.Characters;
+
     public class Program
     {
         static void Main(string[] args)
         {
-           GameEngine game = new GameEngine();
-           game.GetIntroductionGame();
+            var player = GameInfo.GameIntroduction();
+            var startGame = new GameEngine(player);
+            int level = 0;
+            startGame.StartGameNPCandItems();
 
-            Console.WriteLine(TextGame.gameTitle);
-            AnsiConsoleGame.WaitingForPlayer();
-            AnsiConsoleGame.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame1);
-            AnsiConsoleGame.WaitingForPlayer();
-            AnsiConsoleGame.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame2);
-            AnsiConsoleGame.WaitingForPlayer();
-            AnsiConsoleGame.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame3);
+            while (level <= 12)
+            {                
+                startGame.DisplayLocation(level);
+                level = startGame.IteractionPlayerWithNPC(level);                
+            }
+
+
         }
     }
 }
