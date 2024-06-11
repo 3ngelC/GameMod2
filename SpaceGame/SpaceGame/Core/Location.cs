@@ -26,19 +26,6 @@ namespace SpaceGame.Core
         public INPC Character
         {
             get { return _character; }
-        }
-
-        public string GetLocationInfo(int selection)
-        {
-            Dictionary<int, string> locationInfo = new Dictionary<int, string>
-            {
-                {0, Constants.TextGame.location0 },
-                {1, Constants.TextGame.location1 },
-                {2, Constants.TextGame.location2 }
-                
-            };
-
-            return locationInfo[selection];
-        }
+        }        
     }
 }

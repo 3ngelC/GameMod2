@@ -11,8 +11,5 @@ namespace SpaceGame.Enums
         Weapon,
         Utility,
         Tool        
-    }
-    internal class ItemType
-    {
-    }
+    }    
 }

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceGame.Characters;
+using SpaceGame.Constants;
 using SpaceGame.Core;
+using SpaceGame.Interfaces;
 using Spectre.Console;
 using static SpaceGame.Core.GameInfo;
 
@@ -31,12 +34,27 @@ namespace SpaceGame.AnsiConsoleGame
             
         }
 
-        public static string GetPlayerInfo()
+        public static void GetBossDescription(Location locationInfo, INPC boss)
+        {
+            AnsiConsole.MarkupLine($"\n[green]-------------Location: {locationInfo.NameLocation}--------------------[/]\n");
+            AnsiConsole.MarkupLine($"Name:[blue] {boss.Name}[/]\n");
+            AnsiConsole.MarkupLine($"[cyan]Description: {boss.Description}[/]\n\n\n");
+        }
+
+        public static void GetNPCInstruction()
+        {
+            AnsiConsole.MarkupLine($"\n[green]it would be best if you had the answer to the following question...[/]\n");
+        }
+
+        public static InfoGame GetPlayerInfo()
         {
             var name = AnsiConsole.Ask<string>("What's your [green]name[/]?");
+            AnsiConsole.Clear();
             AnsiConsole.MarkupLine($"Hello [green]{name}[/]!");
+            var description = AnsiConsole.Ask<string>("Please insert a description for your character:");
+            AnsiConsole.Clear();
 
-            return name;
+            return new InfoGame(name, description);
         }
 
         public static string AskPlayer(string question)
@@ -88,6 +106,30 @@ namespace SpaceGame.AnsiConsoleGame
                     ctx.Spinner(Spinner.Known.Star);
                     Thread.Sleep(3000);
                 });
+        }
+
+        public static void CheckVictory(bool checkItem)
+        {
+            AnsiConsole.Clear();
+            Animation("Fighting...");
+
+            if (checkItem)
+            {
+                AnsiConsole.MarkupLine("[yellow] You defeated the Alien[/]");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine("[red]\nYOU LOSE\nGAME OVER[/]");
+                Environment.Exit(0);
+            }
+        }
+
+        public static void GetFinalDescription()
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.MarkupLine($"[green]{TextGame.finalDescription}[/]");
+            WaitingForPlayer();
+            AnsiConsole.WriteLine(TextGame.finalMessage);
         }
     }
 }

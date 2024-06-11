@@ -1,4 +1,6 @@
-﻿using SpaceGame.Core;
+﻿using SpaceGame.AnsiConsoleGame;
+using SpaceGame.Core;
+using SpaceGame.Enums;
 using SpaceGame.Interfaces;
 using Spectre.Console;
 using System;
@@ -13,19 +15,24 @@ namespace SpaceGame.Characters
     {
         private readonly string _name;        
         private readonly List<Item> _items;
-        private int _countItems;
+        private readonly string _description;        
 
-        public Player(string name)
+        public Player(string name, string description)
         {
-            _name = name;            
-            _items = [];
-            _countItems = 0;
+            _name = name;
+            _description = description;
+            _items = [];            
         }
 
         public string Name
         {
             get { return _name; }
-        }        
+        }
+
+        public string Description
+        {
+            get { return _description; }
+        }
 
         public List<Item> Items
         {
@@ -79,7 +86,7 @@ namespace SpaceGame.Characters
 
         public int GetLevelDecisionPlayer(int level)
         {            
-            string title = "Where do you want to go?";
+            string title = "There is the following path(s) in front of you\n\nWhere do you want to go?";
             List<string> options = GameInfo.LevelsAvailable(level);
 
             string decision = AnsiConsoleGame.AnsiConsoleG.CreateDecisionPlayer(title, options.ToArray());
@@ -92,6 +99,54 @@ namespace SpaceGame.Characters
             Dictionary<int, string> levels = GameInfo.GetAllLevels();
 
             return levels.FirstOrDefault(x => x.Value == decision).Key;
+        }
+
+        public List<string> SelectItemsPlayer()
+        {
+            AnsiConsole.MarkupLine("[yellow]There is an Alien in fron of you[/]");
+
+            string[] itemOptions = GetItemNamePlayer();
+
+            GetPlayerDecisions();
+
+            if (itemOptions.Length == 0)
+            {
+                AnsiConsole.MarkupLine("[yellow]There isn't items to select...[/]");
+                AnsiConsoleG.WaitingForPlayer();
+                AnsiConsoleG.CheckVictory(false);
+            }            
+            
+            var seleccion = AnsiConsole.Prompt(
+                new MultiSelectionPrompt<string>()
+                 .Title("\n\n\n\nSelect items to fight:")
+                    .PageSize(10)
+                    .AddChoices(itemOptions));
+
+            AnsiConsole.WriteLine("\nYou selected the following items");
+            foreach (var item in seleccion)
+            {
+                AnsiConsole.WriteLine(item);
+            }
+            return seleccion;
+        }
+
+        public string[] GetItemNamePlayer()
+        {
+            return _items
+                    .Where(item => item != null && item.ItemName != null)
+                    .Select(item => item.ItemName)
+                    .ToArray();
+        }
+
+        public List<Types> ChekingItemsType(List<string> itemsSelected)
+        {
+            var itemTypesSelected = from item in _items
+                                    where item != null && item.ItemName != null
+                                    join itemNames in itemsSelected
+                                    on item.ItemName equals itemNames
+                                    select item.ItemType;
+
+            return itemTypesSelected.ToList();
         }
     }
 }

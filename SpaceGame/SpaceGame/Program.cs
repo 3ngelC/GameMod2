@@ -1,8 +1,7 @@
 ﻿using SpaceGame.Constants;
 using SpaceGame.Core;
 using Spectre.Console;
-//using static SpaceGame.Constants;
-//using SpaceGame.AnsiConsoleGame;
+using System;
 
 namespace SpaceGame
 {
@@ -14,17 +13,21 @@ namespace SpaceGame
         static void Main(string[] args)
         {
             var player = GameInfo.GameIntroduction();
-            var startGame = new GameEngine(player);
+            var startGame = new GameEngine(player.Name, player.Description);
             int level = 0;
             startGame.StartGameNPCandItems();
+            bool game = true;
 
-            while (level <= 12)
-            {                
+            while (game)
+            {
                 startGame.DisplayLocation(level);
-                level = startGame.IteractionPlayerWithNPC(level);                
+                level = startGame.IteractionPlayerWithNPC(level);
+                if (level == 13)
+                {
+                    AnsiConsoleG.GetFinalDescription();
+                    game = false;
+                }
             }
-
-
-        }
+        }   
     }
 }

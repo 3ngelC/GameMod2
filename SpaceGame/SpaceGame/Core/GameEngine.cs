@@ -19,19 +19,15 @@ namespace SpaceGame.Core
         private readonly List<INPC> _npcs;
         private readonly List<Types> _bossWeakness;
         private readonly List<Item> _items;
-        private readonly Player _player1;
-        private int _countLocations;
-        private int _countBoss;
+        private readonly Player _player1;        
 
-        public GameEngine(string name)
+        public GameEngine(string name, string description)
         {
             _locations = [];
             _npcs = [];
             _bossWeakness = [];
             _items = new List<Item>();
-            _player1 = new Player(name);
-            _countLocations = 0;
-            _countBoss = 0;
+            _player1 = new Player(name, description);            
         }
 
         public List<Location> Locations
@@ -52,12 +48,7 @@ namespace SpaceGame.Core
         public Player Player1
         {
             get { return _player1; }
-        }
-
-        public int CountLocations
-        {
-            get { return _countLocations; }
-        }
+        }        
          
         public INPC GetNPCbyLevel(int level)
         {
@@ -81,7 +72,7 @@ namespace SpaceGame.Core
 
         public void AddLocation()
         {
-            Enumerable.Range(0, 13).ToList().ForEach(i =>
+            Enumerable.Range(0, 14).ToList().ForEach(i =>
             {
                 INPC npc = GetNPCbyLevel(i);
                 var location = GameInfo.GetLocationInfo(i);
@@ -92,7 +83,7 @@ namespace SpaceGame.Core
 
         public void CreateNPC()
         {         
-            _npcs.Add(new NPC(TextGame.npcName0));                        
+            _npcs.Add(new NPC(TextGame.npcName0, TextGame.npcDescription0));                        
         }
 
         public void CreateBoss()
@@ -101,7 +92,8 @@ namespace SpaceGame.Core
             {
                 var npcInfo = GameInfo.GetBossInfo(i);
 
-                _npcs.Add(new BossNPC(npcInfo.Name, npcInfo.Description));
+                _npcs.Add(new BossNPC(npcInfo.Name, npcInfo.Description, Types.Weapon));
+                _bossWeakness.Add(Types.Weapon);                
             });
         }
 
@@ -109,6 +101,21 @@ namespace SpaceGame.Core
         {
             string locationInfo = _locations[level].NameLocation;
             AnsiConsoleG.GetPrintLocationInfo(locationInfo);
+            AnsiConsole.Clear();
+            NPCIntroduction(level);
+        }
+
+        public void NPCIntroduction(int level)
+        {
+            if (_locations[level].Character is BossNPC)
+            {
+                //BossNPC boss = _npcs[level];
+                AnsiConsoleG.GetBossDescription(_locations[level], _locations[level].Character);
+            }
+            else if (_locations[level].Character is NPC) 
+            {
+                AnsiConsoleG.GetNPCInstruction();
+            }
         }
 
         public void CreateItems()
@@ -133,7 +140,7 @@ namespace SpaceGame.Core
         {
             if (level == 7 || level == 8 || level == 12)
             {
-                return 0;
+                return IteractionBoss(level);
             }
             else
             {
@@ -161,6 +168,42 @@ namespace SpaceGame.Core
             }
         }
 
-        
+        public int IteractionBoss(int level)
+        {
+            List<string> itemSelected = _player1.SelectItemsPlayer();
+            List<Types> itemsTypesSelected = _player1.ChekingItemsType(itemSelected);
+            FightingWithBoss(level, itemsTypesSelected);
+            Player1.GetPlayerDecisions();
+            AnsiConsole.Clear();
+
+            return Player1.GetLevelDecisionPlayer(level);
+        }
+
+        private void FightingWithBoss(int level, List<Types> itemsTypeSelected)
+        {
+            var boss = GetNPCbyLevel(level);            
+            int bossNumber = GetBossNumber(boss.Name);
+            var bossWeakness = _bossWeakness[bossNumber];
+            bool checkItem = false;
+
+            foreach (var item in itemsTypeSelected)
+            {
+                if (bossWeakness == item)
+                {
+                    checkItem = true;
+                    break;
+                }
+            }
+            AnsiConsoleG.CheckVictory(checkItem);
+        }
+
+        private int GetBossNumber(string bossName)
+        {
+            Dictionary<int, string> levels = GameInfo.GetBossNumber();
+
+            return levels.FirstOrDefault(x => x.Value == bossName).Key;
+        }
+
+
     }
 }

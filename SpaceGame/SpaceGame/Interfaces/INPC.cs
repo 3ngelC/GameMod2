@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace SpaceGame.Interfaces
 {
     public interface INPC : ICharacter
-    {
-        void IntroduceNPC(int locationID);
-        void AddItem(int locationID);
+    {        
+        
     }
 }

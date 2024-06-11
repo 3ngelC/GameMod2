@@ -10,36 +10,31 @@ namespace SpaceGame.Characters
 {
     internal class NPC : INPC
     {
-        private readonly string _name;        
-        private readonly List<Item> _items;
-        private int _countItems;
+        private readonly string _name;
+        private readonly string _description;
+        private readonly List<Item> _items;        
 
-        public NPC(string name)
+        public NPC(string name, string description)
         {
-            _name = name;            
-            _items = [];
-            _countItems = 0;
+            _name = name;
+            _description = description;
+            _items = [];            
         }
 
         public string Name
         {
             get { return _name; }
         }
-             
+
+        public string Description
+        {
+            get { return _description; }
+        }
 
         public List<Item> Items
         {
             get { return _items; }
         }
-
-        public void IntroduceNPC(int level)
-        {
-            
-        }
-
-        public void AddItem(int level)
-        {
-
-        }
+                        
     }
 }

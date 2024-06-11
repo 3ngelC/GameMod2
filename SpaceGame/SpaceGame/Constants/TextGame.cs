@@ -29,8 +29,11 @@ namespace SpaceGame.Constants
         public const string npcName2 = "Allana";
         public const string npcName3 = "Voriam";
 
+        //NPCDescription
+        public const string npcDescription0 = "Navigation Assistant";
+
         //BossDescriptions
-        public const string npcDescription1 = "Fast Alien, experto en pelea a distancia";
+        public const string npcDescription1 = "Fast Alien, distance fighting expert";
         public const string npcDescription2 = "Strong Alien, with hard skin";
         public const string npcDescription3 = "luminous alien";
 
@@ -48,7 +51,7 @@ namespace SpaceGame.Constants
         public const string itemName5 = "Grenade";
         public const string itemDescription5 = "small explosive bomb";
         public const string itemName6 = "Dynamite";
-        public const string itemDescription6 = "Manual pistol";
+        public const string itemDescription6 = "Explosive";
 
         //location information
         public const string location0 = "Main hall";
@@ -60,10 +63,11 @@ namespace SpaceGame.Constants
         public const string location6 = "Command center";
         public const string location7 = "Bedrooms";
         public const string location8 = "Maintenance room";
-        public const string location9 = "Weapons room";
+        public const string location9 = "Tool warehouse";
         public const string location10 = "Gym room";
         public const string location11 = "Freight area 1";
         public const string location12 = "Freight area 2";
+        public const string location13 = "Takeoff and landing runway";
 
         //IteractionsNPC
         public const string question0 = "Do you want to grab the axe?";
@@ -72,7 +76,7 @@ namespace SpaceGame.Constants
         public const string answer1 = "silver";
         public const string question2 = "What is the hardest natural substance on Earth?";
         public const string answer2 = "diamond";
-        public const string question3 = "Which is the main gas that makes up the Earth's atmosphere";
+        public const string question3 = "Which is the main gas that makes up the Earth's atmosphere?";
         public const string answer3 = "nitrogen";
         public const string question4 = "What is the biggest planet in our solar system?";
         public const string answer4 = "jupiter";
@@ -84,10 +88,32 @@ namespace SpaceGame.Constants
         public const string answer9 = "universal serial bus";
         public const string question10 = "What is the largest desert on Earth?";
         public const string answer10 = "antartica";
+        public const string question11 = "What is the most abundant gas in the Earth's atmosphere?";
+        public const string answer11 = "nitrogen";
 
         //answerNPC
         public const string answerNPC = "";
-        
+
+        //Final Text
+        public const string finalDescription = "You were able to find the ship and return to earth safely!!";
+
+        public const string finalMessage = @"
+             __     ______  _    _  __          _______ _   _ 
+             \ \   / / __ \| |  | | \ \        / /_   _| \ | |
+              \ \_/ / |  | | |  | |  \ \  /\  / /  | | |  \| |
+               \   /| |  | | |  | |   \ \/  \/ /   | | | . ` |
+                | | | |__| | |__| |    \  /\  /   _| |_| |\  |
+                |_|  \____/ \____/      \/  \/   |_____|_| \_|                                             
+               _____          __  __ ______    ______      ________ _____  
+              / ____|   /\   |  \/  |  ____|  / __ \ \    / /  ____|  __ \ 
+             | |  __   /  \  | \  / | |__    | |  | \ \  / /| |__  | |__) |
+             | | |_ | / /\ \ | |\/| |  __|   | |  | |\ \/ / |  __| |  _  / 
+             | |__| |/ ____ \| |  | | |____  | |__| | \  /  | |____| | \ \ 
+              \_____/_/    \_\_|  |_|______|  \____/   \/   |______|_|  \_\
+
+        ";
+
+
 
 
 

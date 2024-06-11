@@ -1,4 +1,5 @@
 ﻿using SpaceGame.Core;
+using SpaceGame.Enums;
 using SpaceGame.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace SpaceGame.Characters
 {
-    internal class BossNPC : INPC
+    public class BossNPC : INPC
     {
         private readonly string _name;
         private readonly string _description;
-        private readonly List<Item> _items;
-        private readonly int _countItems;
+        private readonly List<Item> _items;       
+        private readonly Types _weakness;
 
-        public BossNPC(string name, string description)
+        public BossNPC(string name, string description, Types weakness)
         {
             _name = name;
             _description = description;
             _items = [];
-            _countItems = 0;
+            _weakness = weakness;            
         }
 
         public string Name 
@@ -38,14 +39,9 @@ namespace SpaceGame.Characters
             get { return _items; }
         }
 
-        public void IntroduceNPC(int locationID)
+        public Types Weakness
         {
-            
-        }
-
-        public void AddItem(int locationID)
-        {
-
-        }
+            get { return _weakness; }
+        }                
     }
 }

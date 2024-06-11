@@ -24,7 +24,7 @@ namespace SpaceGame.Core
 
         
 
-        public static string GameIntroduction()
+        public static InfoGame GameIntroduction()
         {
             Console.WriteLine(TextGame.gameTitle);
             AnsiConsoleG.WaitingForPlayer();
@@ -45,8 +45,8 @@ namespace SpaceGame.Core
             Dictionary<int, InfoGame> npcName = new Dictionary<int, InfoGame>
             {
                 {1, new InfoGame(Constants.TextGame.npcName1, Constants.TextGame.npcDescription1)},
-                {2, new InfoGame(Constants.TextGame.npcName1, Constants.TextGame.npcDescription1)},
-                {3, new InfoGame(Constants.TextGame.npcName1, Constants.TextGame.npcDescription1)}                
+                {2, new InfoGame(Constants.TextGame.npcName2, Constants.TextGame.npcDescription2)},
+                {3, new InfoGame(Constants.TextGame.npcName3, Constants.TextGame.npcDescription3)}                
             };
 
             return npcName[level];
@@ -69,6 +69,7 @@ namespace SpaceGame.Core
                 {10, Constants.TextGame.location10 },
                 {11, Constants.TextGame.location11 },
                 {12, Constants.TextGame.location12 },
+                {13, Constants.TextGame.location13 },
             };
 
             return locationName[level];
@@ -102,7 +103,8 @@ namespace SpaceGame.Core
                 {5, new InfoGame(Constants.TextGame.question5, Constants.TextGame.answer5)},
                 {6, new InfoGame(Constants.TextGame.question6, Constants.TextGame.answer6)},
                 {9, new InfoGame(Constants.TextGame.question9, Constants.TextGame.answer9)},
-                {10, new InfoGame(Constants.TextGame.question10, Constants.TextGame.answer10)},                
+                {10, new InfoGame(Constants.TextGame.question10, Constants.TextGame.answer10)},
+                {11, new InfoGame(Constants.TextGame.question11, Constants.TextGame.answer11)},
             };
 
             return questions[level];
@@ -119,10 +121,12 @@ namespace SpaceGame.Core
                 {5, new List<string>{ Constants.TextGame.location7} },
                 {4, new List<string>{ Constants.TextGame.location8} },
                 {6, new List<string>{ Constants.TextGame.location8} },
-                {7, new List<string>{ Constants.TextGame.location9} },
+                {7, new List<string>{ Constants.TextGame.location2, Constants.TextGame.location9} },
                 {8, new List<string>{ Constants.TextGame.location10} },
                 {9, new List<string>{ Constants.TextGame.location11, Constants.TextGame.location12} },
                 {10, new List<string>{ Constants.TextGame.location12} },
+                {11, new List<string>{ Constants.TextGame.location13} },
+                {12, new List<string>{ Constants.TextGame.location13} },
             };
 
             return levelsAvailable[level];
@@ -145,9 +149,22 @@ namespace SpaceGame.Core
                 {10, Constants.TextGame.location10 },
                 {11, Constants.TextGame.location11 },
                 {12, Constants.TextGame.location12 },
+                {13, Constants.TextGame.location13 },
             };
 
             return locationName;
+        }
+
+        public static Dictionary<int, string> GetBossNumber()
+        {
+            Dictionary<int, string> bossNumber = new Dictionary<int, string>
+            {
+                {0, Constants.TextGame.npcName1},
+                {1, Constants.TextGame.npcName1},
+                {2, Constants.TextGame.npcName1}
+            };
+
+            return bossNumber;
         }
     }
 }
