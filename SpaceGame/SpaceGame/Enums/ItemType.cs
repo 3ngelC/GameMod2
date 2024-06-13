@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SpaceGame.Enums;
 
-namespace SpaceGame.Enums
+public enum Types
 {
-    public enum Types
-    {
-        Weapon,
-        Utility,
-        Tool        
-    }    
-}
+    Weapon,
+    Utility,
+    Tool        
+}    

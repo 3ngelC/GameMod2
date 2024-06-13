@@ -1,170 +1,163 @@
-﻿using SpaceGame.AnsiConsoleGame;
+﻿namespace SpaceGame.Core;
+
+using SpaceGame.AnsiConsoleGame;
 using SpaceGame.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SpaceGame.Core
+
+public class GameInfo
 {
-    public class GameInfo
+    public struct InfoGame
     {
-        public struct InfoGame
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public InfoGame(string name, string description)
         {
-            public string Name { get; set; }
-            public string Description { get; set; }
-
-            public InfoGame(string name, string description)
-            {
-                Name = name;
-                Description = description;
-            }
+            Name = name;
+            Description = description;
         }
+    }        
 
+    public static string GameIntroduction()
+    {
+        Console.WriteLine(TextGame.gameTitle);
+        AnsiConsoleG.WaitingForPlayer();
+
+        var playerName = AnsiConsoleG.GetPlayerInfo();
         
+        AnsiConsoleG.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame1);
+        AnsiConsoleG.WaitingForPlayer();
+        AnsiConsoleG.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame2);
+        AnsiConsoleG.WaitingForPlayer();
+        AnsiConsoleG.GetPrintGreenText($"{playerName}{SpaceGame.Constants.TextGame.introGame3}");
 
-        public static InfoGame GameIntroduction()
+        return playerName;
+    }
+
+    public static InfoGame GetBossInfo(int level)
+    {
+        var npcName = new Dictionary<int, InfoGame>
         {
-            Console.WriteLine(TextGame.gameTitle);
-            AnsiConsoleG.WaitingForPlayer();
+            {1, new InfoGame(Constants.TextGame.npcName1, Constants.TextGame.npcDescription1)},
+            {2, new InfoGame(Constants.TextGame.npcName2, Constants.TextGame.npcDescription2)},
+            {3, new InfoGame(Constants.TextGame.npcName3, Constants.TextGame.npcDescription3)}                
+        };
 
-            var playerName = AnsiConsoleG.GetPlayerInfo();
-            
-            AnsiConsoleG.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame1);
-            AnsiConsoleG.WaitingForPlayer();
-            AnsiConsoleG.GetPrintGreenText(SpaceGame.Constants.TextGame.introGame2);
-            AnsiConsoleG.WaitingForPlayer();
-            AnsiConsoleG.GetPrintGreenText($"{playerName}{SpaceGame.Constants.TextGame.introGame3}");
+        return npcName[level];
+    }
 
-            return playerName;
-        }
-
-        public static InfoGame GetBossInfo(int level)
+    public static string GetLocationInfo(int level)
+    {
+        Dictionary<int, string> locationName = new Dictionary<int, string>
         {
-            Dictionary<int, InfoGame> npcName = new Dictionary<int, InfoGame>
-            {
-                {1, new InfoGame(Constants.TextGame.npcName1, Constants.TextGame.npcDescription1)},
-                {2, new InfoGame(Constants.TextGame.npcName2, Constants.TextGame.npcDescription2)},
-                {3, new InfoGame(Constants.TextGame.npcName3, Constants.TextGame.npcDescription3)}                
-            };
+            {0, Constants.TextGame.location0 },
+            {1, Constants.TextGame.location1 },
+            {2, Constants.TextGame.location2 },
+            {3, Constants.TextGame.location3 },
+            {4, Constants.TextGame.location4 },
+            {5, Constants.TextGame.location5 },
+            {6, Constants.TextGame.location6 },
+            {7, Constants.TextGame.location7 },
+            {8, Constants.TextGame.location8 },
+            {9, Constants.TextGame.location9 },
+            {10, Constants.TextGame.location10 },
+            {11, Constants.TextGame.location11 },
+            {12, Constants.TextGame.location12 },
+            {13, Constants.TextGame.location13 },
+        };
 
-            return npcName[level];
-        }
+        return locationName[level];
+    }
 
-        public static string GetLocationInfo(int level)
+    public static InfoGame GetItemInfo(int level)
+    {
+        Dictionary<int, InfoGame> itemInformation = new Dictionary<int, InfoGame>
         {
-            Dictionary<int, string> locationName = new Dictionary<int, string>
-            {
-                {0, Constants.TextGame.location0 },
-                {1, Constants.TextGame.location1 },
-                {2, Constants.TextGame.location2 },
-                {3, Constants.TextGame.location3 },
-                {4, Constants.TextGame.location4 },
-                {5, Constants.TextGame.location5 },
-                {6, Constants.TextGame.location6 },
-                {7, Constants.TextGame.location7 },
-                {8, Constants.TextGame.location8 },
-                {9, Constants.TextGame.location9 },
-                {10, Constants.TextGame.location10 },
-                {11, Constants.TextGame.location11 },
-                {12, Constants.TextGame.location12 },
-                {13, Constants.TextGame.location13 },
-            };
+            {0,  new InfoGame(Constants.TextGame.itemName0, Constants.TextGame.itemDescription0)},
+            {1,  new InfoGame(Constants.TextGame.itemName1, Constants.TextGame.itemDescription1)},
+            {2,  new InfoGame(Constants.TextGame.itemName2, Constants.TextGame.itemDescription2)},
+            {3,  new InfoGame(Constants.TextGame.itemName3, Constants.TextGame.itemDescription3)},
+            {4,  new InfoGame(Constants.TextGame.itemName4, Constants.TextGame.itemDescription4)},
+            {5,  new InfoGame(Constants.TextGame.itemName5, Constants.TextGame.itemDescription5)},
+            {6,  new InfoGame(Constants.TextGame.itemName6, Constants.TextGame.itemDescription6)},
+        };
 
-            return locationName[level];
-        }
+        return itemInformation[level];
+    }
 
-        public static InfoGame GetItemInfo(int level)
+    public static InfoGame GetQuestions(int level)
+    {
+        Dictionary<int, InfoGame> questions = new Dictionary<int, InfoGame>
         {
-            Dictionary<int, InfoGame> itemInformation = new Dictionary<int, InfoGame>
-            {
-                {0,  new InfoGame(Constants.TextGame.itemName0, Constants.TextGame.itemDescription0)},
-                {1,  new InfoGame(Constants.TextGame.itemName1, Constants.TextGame.itemDescription1)},
-                {2,  new InfoGame(Constants.TextGame.itemName2, Constants.TextGame.itemDescription2)},
-                {3,  new InfoGame(Constants.TextGame.itemName3, Constants.TextGame.itemDescription3)},
-                {4,  new InfoGame(Constants.TextGame.itemName4, Constants.TextGame.itemDescription4)},
-                {5,  new InfoGame(Constants.TextGame.itemName5, Constants.TextGame.itemDescription5)},
-                {6,  new InfoGame(Constants.TextGame.itemName6, Constants.TextGame.itemDescription6)},
-            };
+            {0, new InfoGame(Constants.TextGame.question0, Constants.TextGame.answer0)},
+            {1, new InfoGame(Constants.TextGame.question1, Constants.TextGame.answer1)},
+            {2, new InfoGame(Constants.TextGame.question2, Constants.TextGame.answer2)},
+            {3, new InfoGame(Constants.TextGame.question3, Constants.TextGame.answer3)},
+            {4, new InfoGame(Constants.TextGame.question4, Constants.TextGame.answer4)},
+            {5, new InfoGame(Constants.TextGame.question5, Constants.TextGame.answer5)},
+            {6, new InfoGame(Constants.TextGame.question6, Constants.TextGame.answer6)},
+            {9, new InfoGame(Constants.TextGame.question9, Constants.TextGame.answer9)},
+            {10, new InfoGame(Constants.TextGame.question10, Constants.TextGame.answer10)},
+            {11, new InfoGame(Constants.TextGame.question11, Constants.TextGame.answer11)},
+        };
 
-            return itemInformation[level];
-        }
+        return questions[level];
+    }
 
-        public static InfoGame GetQuestions(int level)
+    public static List<string> LevelsAvailable(int level)
+    {
+        Dictionary<int, List<string>> levelsAvailable = new Dictionary<int, List<string>>
         {
-            Dictionary<int, InfoGame> questions = new Dictionary<int, InfoGame>
-            {
-                {0, new InfoGame(Constants.TextGame.question0, Constants.TextGame.answer0)},
-                {1, new InfoGame(Constants.TextGame.question1, Constants.TextGame.answer1)},
-                {2, new InfoGame(Constants.TextGame.question2, Constants.TextGame.answer2)},
-                {3, new InfoGame(Constants.TextGame.question3, Constants.TextGame.answer3)},
-                {4, new InfoGame(Constants.TextGame.question4, Constants.TextGame.answer4)},
-                {5, new InfoGame(Constants.TextGame.question5, Constants.TextGame.answer5)},
-                {6, new InfoGame(Constants.TextGame.question6, Constants.TextGame.answer6)},
-                {9, new InfoGame(Constants.TextGame.question9, Constants.TextGame.answer9)},
-                {10, new InfoGame(Constants.TextGame.question10, Constants.TextGame.answer10)},
-                {11, new InfoGame(Constants.TextGame.question11, Constants.TextGame.answer11)},
-            };
+            {0, new List<string>{ Constants.TextGame.location1, Constants.TextGame.location2} },
+            {1, new List<string>{ Constants.TextGame.location3, Constants.TextGame.location5} },
+            {2, new List<string>{ Constants.TextGame.location4, Constants.TextGame.location6} },
+            {3, new List<string>{ Constants.TextGame.location7} },
+            {5, new List<string>{ Constants.TextGame.location7} },
+            {4, new List<string>{ Constants.TextGame.location8} },
+            {6, new List<string>{ Constants.TextGame.location8} },
+            {7, new List<string>{ Constants.TextGame.location2, Constants.TextGame.location9} },
+            {8, new List<string>{ Constants.TextGame.location10} },
+            {9, new List<string>{ Constants.TextGame.location11, Constants.TextGame.location12} },
+            {10, new List<string>{ Constants.TextGame.location12} },
+            {11, new List<string>{ Constants.TextGame.location13} },
+            {12, new List<string>{ Constants.TextGame.location13} },
+        };
 
-            return questions[level];
-        }
+        return levelsAvailable[level];
+    }
 
-        public static List<string> LevelsAvailable(int level)
+    public static Dictionary<int, string> GetAllLevels()
+    {
+        Dictionary<int, string> locationName = new Dictionary<int, string>
         {
-            Dictionary<int, List<string>> levelsAvailable = new Dictionary<int, List<string>>
-            {
-                {0, new List<string>{ Constants.TextGame.location1, Constants.TextGame.location2} },
-                {1, new List<string>{ Constants.TextGame.location3, Constants.TextGame.location5} },
-                {2, new List<string>{ Constants.TextGame.location4, Constants.TextGame.location6} },
-                {3, new List<string>{ Constants.TextGame.location7} },
-                {5, new List<string>{ Constants.TextGame.location7} },
-                {4, new List<string>{ Constants.TextGame.location8} },
-                {6, new List<string>{ Constants.TextGame.location8} },
-                {7, new List<string>{ Constants.TextGame.location2, Constants.TextGame.location9} },
-                {8, new List<string>{ Constants.TextGame.location10} },
-                {9, new List<string>{ Constants.TextGame.location11, Constants.TextGame.location12} },
-                {10, new List<string>{ Constants.TextGame.location12} },
-                {11, new List<string>{ Constants.TextGame.location13} },
-                {12, new List<string>{ Constants.TextGame.location13} },
-            };
+            {0, Constants.TextGame.location0 },
+            {1, Constants.TextGame.location1 },
+            {2, Constants.TextGame.location2 },
+            {3, Constants.TextGame.location3 },
+            {4, Constants.TextGame.location4 },
+            {5, Constants.TextGame.location5 },
+            {6, Constants.TextGame.location6 },
+            {7, Constants.TextGame.location7 },
+            {8, Constants.TextGame.location8 },
+            {9, Constants.TextGame.location9 },
+            {10, Constants.TextGame.location10 },
+            {11, Constants.TextGame.location11 },
+            {12, Constants.TextGame.location12 },
+            {13, Constants.TextGame.location13 },
+        };
 
-            return levelsAvailable[level];
-        }
+        return locationName;
+    }
 
-        public static Dictionary<int, string> GetAllLevels()
+    public static Dictionary<int, string> GetBossNumber()
+    {
+        Dictionary<int, string> bossNumber = new Dictionary<int, string>
         {
-            Dictionary<int, string> locationName = new Dictionary<int, string>
-            {
-                {0, Constants.TextGame.location0 },
-                {1, Constants.TextGame.location1 },
-                {2, Constants.TextGame.location2 },
-                {3, Constants.TextGame.location3 },
-                {4, Constants.TextGame.location4 },
-                {5, Constants.TextGame.location5 },
-                {6, Constants.TextGame.location6 },
-                {7, Constants.TextGame.location7 },
-                {8, Constants.TextGame.location8 },
-                {9, Constants.TextGame.location9 },
-                {10, Constants.TextGame.location10 },
-                {11, Constants.TextGame.location11 },
-                {12, Constants.TextGame.location12 },
-                {13, Constants.TextGame.location13 },
-            };
+            {0, Constants.TextGame.npcName1},
+            {1, Constants.TextGame.npcName1},
+            {2, Constants.TextGame.npcName1}
+        };
 
-            return locationName;
-        }
-
-        public static Dictionary<int, string> GetBossNumber()
-        {
-            Dictionary<int, string> bossNumber = new Dictionary<int, string>
-            {
-                {0, Constants.TextGame.npcName1},
-                {1, Constants.TextGame.npcName1},
-                {2, Constants.TextGame.npcName1}
-            };
-
-            return bossNumber;
-        }
+        return bossNumber;
     }
 }

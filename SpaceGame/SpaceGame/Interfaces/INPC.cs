@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SpaceGame.Interfaces;
 
-namespace SpaceGame.Interfaces
-{
-    public interface INPC : ICharacter
-    {        
-        
-    }
+public interface INPC : ICharacter
+{       
+    string Name { get; }   
+    string Description { get; }  
 }
