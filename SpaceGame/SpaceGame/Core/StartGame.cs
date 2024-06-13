@@ -1,16 +1,5 @@
 ﻿namespace SpaceGame.Core;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Timers;
-
-
-
-
 public class StartGame
 {
     public static void StartSpaceGame()
@@ -30,8 +19,6 @@ public class StartGame
                 AnsiConsoleGame.AnsiConsoleG.GetFinalDescription();
                 game = false;
             }
-
         }
-    }
-    
+    }    
 }
