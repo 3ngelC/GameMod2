@@ -16,6 +16,7 @@ public class StartGame
         {
             startGame.DisplayLocation(level);
             level = startGame.IteractionPlayerWithNPC(level);
+
             if (level == Constants.NumberGameComponents.endLevel)
             {
                 AnsiConsoleGame.AnsiConsoleG.GetFinalDescription();

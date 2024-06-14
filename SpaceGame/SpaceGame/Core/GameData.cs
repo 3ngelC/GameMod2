@@ -5,19 +5,7 @@ using SpaceGame.Constants;
 
 
 public class GameData
-{
-    public struct InfoGame
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public InfoGame(string name, string description)
-        {
-            Name = name;
-            Description = description;
-        }
-    }        
-
+{           
     public static string GameIntroduction()
     {
         Console.WriteLine(IntroductionGameData.gameTitle);
@@ -35,13 +23,13 @@ public class GameData
         return playerName;
     }
 
-    public static InfoGame GetBossInfo(int level)
+    public static GameInformation.InfoGame GetBossInfo(int level)
     {
-        var npcName = new Dictionary<int, InfoGame>
+        var npcName = new Dictionary<int, GameInformation.InfoGame>
         {
-            {1, new InfoGame(Constants.NPCData.npcName1, Constants.NPCData.npcDescription1)},
-            {2, new InfoGame(Constants.NPCData.npcName2, Constants.NPCData.npcDescription2)},
-            {3, new InfoGame(Constants.NPCData.npcName3, Constants.NPCData.npcDescription3)}                
+            {1, new GameInformation.InfoGame(Constants.NPCData.npcName1, Constants.NPCData.npcDescription1)},
+            {2, new GameInformation.InfoGame(Constants.NPCData.npcName2, Constants.NPCData.npcDescription2)},
+            {3, new GameInformation.InfoGame(Constants.NPCData.npcName3, Constants.NPCData.npcDescription3)}                
         };
 
         return npcName[level];
@@ -70,36 +58,36 @@ public class GameData
         return locationName[level];
     }
 
-    public static InfoGame GetItemInfo(int level)
+    public static GameInformation.InfoGame GetItemInfo(int level)
     {
-        Dictionary<int, InfoGame> itemInformation = new Dictionary<int, InfoGame>
+        Dictionary<int, GameInformation.InfoGame> itemInformation = new Dictionary<int, GameInformation.InfoGame>
         {
-            {0,  new InfoGame(Constants.ItemsData.itemName0, Constants.ItemsData.itemDescription0)},
-            {1,  new InfoGame(Constants.ItemsData.itemName1, Constants.ItemsData.itemDescription1)},
-            {2,  new InfoGame(Constants.ItemsData.itemName2, Constants.ItemsData.itemDescription2)},
-            {3,  new InfoGame(Constants.ItemsData.itemName3, Constants.ItemsData.itemDescription3)},
-            {4,  new InfoGame(Constants.ItemsData.itemName4, Constants.ItemsData.itemDescription4)},
-            {5,  new InfoGame(Constants.ItemsData.itemName5, Constants.ItemsData.itemDescription5)},
-            {6,  new InfoGame(Constants.ItemsData.itemName6, Constants.ItemsData.itemDescription6)},
+            {0,  new GameInformation.InfoGame(Constants.ItemsData.itemName0, Constants.ItemsData.itemDescription0)},
+            {1,  new GameInformation.InfoGame(Constants.ItemsData.itemName1, Constants.ItemsData.itemDescription1)},
+            {2,  new GameInformation.InfoGame(Constants.ItemsData.itemName2, Constants.ItemsData.itemDescription2)},
+            {3,  new GameInformation.InfoGame(Constants.ItemsData.itemName3, Constants.ItemsData.itemDescription3)},
+            {4,  new GameInformation.InfoGame(Constants.ItemsData.itemName4, Constants.ItemsData.itemDescription4)},
+            {5,  new GameInformation.InfoGame(Constants.ItemsData.itemName5, Constants.ItemsData.itemDescription5)},
+            {6,  new GameInformation.InfoGame(Constants.ItemsData.itemName6, Constants.ItemsData.itemDescription6)},
         };
 
         return itemInformation[level];
     }
 
-    public static InfoGame GetQuestions(int level)
+    public static GameInformation.InfoGame GetQuestions(int level)
     {
-        Dictionary<int, InfoGame> questions = new Dictionary<int, InfoGame>
+        Dictionary<int, GameInformation.InfoGame> questions = new Dictionary<int, GameInformation.InfoGame>
         {
-            {0, new InfoGame(Constants.QuestionsNPC.question0, Constants.QuestionsNPC.answer0)},
-            {1, new InfoGame(Constants.QuestionsNPC.question1, Constants.QuestionsNPC.answer1)},
-            {2, new InfoGame(Constants.QuestionsNPC.question2, Constants.QuestionsNPC.answer2)},
-            {3, new InfoGame(Constants.QuestionsNPC.question3, Constants.QuestionsNPC.answer3)},
-            {4, new InfoGame(Constants.QuestionsNPC.question4, Constants.QuestionsNPC.answer4)},
-            {5, new InfoGame(Constants.QuestionsNPC.question5, Constants.QuestionsNPC.answer5)},
-            {6, new InfoGame(Constants.QuestionsNPC.question6, Constants.QuestionsNPC.answer6)},
-            {9, new InfoGame(Constants.QuestionsNPC.question9, Constants.QuestionsNPC.answer9)},
-            {10, new InfoGame(Constants.QuestionsNPC.question10, Constants.QuestionsNPC.answer10)},
-            {11, new InfoGame(Constants.QuestionsNPC.question11, Constants.QuestionsNPC.answer11)},
+            {0, new GameInformation.InfoGame(Constants.QuestionsNPC.question0, Constants.QuestionsNPC.answer0)},
+            {1, new GameInformation.InfoGame(Constants.QuestionsNPC.question1, Constants.QuestionsNPC.answer1)},
+            {2, new GameInformation.InfoGame(Constants.QuestionsNPC.question2, Constants.QuestionsNPC.answer2)},
+            {3, new GameInformation.InfoGame(Constants.QuestionsNPC.question3, Constants.QuestionsNPC.answer3)},
+            {4, new GameInformation.InfoGame(Constants.QuestionsNPC.question4, Constants.QuestionsNPC.answer4)},
+            {5, new GameInformation.InfoGame(Constants.QuestionsNPC.question5, Constants.QuestionsNPC.answer5)},
+            {6, new GameInformation.InfoGame(Constants.QuestionsNPC.question6, Constants.QuestionsNPC.answer6)},
+            {9, new GameInformation.InfoGame(Constants.QuestionsNPC.question9, Constants.QuestionsNPC.answer9)},
+            {10, new GameInformation.InfoGame(Constants.QuestionsNPC.question10, Constants.QuestionsNPC.answer10)},
+            {11, new GameInformation.InfoGame(Constants.QuestionsNPC.question11, Constants.QuestionsNPC.answer11)},
         };
 
         return questions[level];

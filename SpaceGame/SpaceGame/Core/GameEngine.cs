@@ -146,7 +146,7 @@ public class GameEngine
 
     private int IteractionNPC(int level)
     {
-        InfoGame question = GameData.GetQuestions(level);
+        GameInformation.InfoGame question = GameData.GetQuestions(level);
         string ask = AnsiConsoleG.AskPlayer(question.Name);
         CheckAnswer(ask, question.Description, level);
         Player1.GetPlayerDecisions();
