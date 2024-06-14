@@ -75,7 +75,7 @@ public class Player : ICharacter
     public int GetLevelDecisionPlayer(int level)
     {            
         string title = "There is the following path(s) in front of you\n\nWhere do you want to go?";
-        List<string> options = GameInfo.LevelsAvailable(level);
+        List<string> options = GameData.LevelsAvailable(level);
 
         string decision = AnsiConsoleGame.AnsiConsoleG.CreateDecisionPlayer(title, options.ToArray());
 
@@ -84,7 +84,7 @@ public class Player : ICharacter
 
     private int GetLevelSelected(string decision)
     {
-        Dictionary<int, string> levels = GameInfo.GetAllLevels();
+        Dictionary<int, string> levels = GameData.GetAllLevels();
 
         return levels.FirstOrDefault(x => x.Value == decision).Key;
     }

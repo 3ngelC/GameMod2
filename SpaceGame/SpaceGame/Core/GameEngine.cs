@@ -9,9 +9,7 @@ using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static SpaceGame.Core.GameInfo;
+using static SpaceGame.Core.GameData;
 
 public class GameEngine
 {
@@ -52,30 +50,29 @@ public class GameEngine
      
     public INPC GetNPCbyLevel(int level)
     {
-        int npcPosition = 0;
+        var positions = GameData.GetNPCPositionbyLevel();
+        
+        int NPCPositionByLevel(int level)
+        {
+            if (positions.TryGetValue(level, out var position))
+            {
+                return position;
+            }
+            else
+            {
+                return positions[0];
+            }
+        }        
 
-        if (level == 7)
-        {
-            npcPosition = 1;
-        }
-        if (level == 8)
-        {
-            npcPosition = 2;
-        }
-        if (level == 12)
-        {
-            npcPosition = 3;
-        }
-
-        return _npcs[npcPosition];
+        return _npcs[NPCPositionByLevel(level)];
     }
 
     public void AddLocation()
     {
-        Enumerable.Range(0, 14).ToList().ForEach(i =>
+        Enumerable.Range(0, Constants.NumberGameComponents.numberOfLocations).ToList().ForEach(i =>
         {
             INPC npc = GetNPCbyLevel(i);
-            var location = GameInfo.GetLocationInfo(i);
+            var location = GameData.GetLocationInfo(i);
 
             _locations.Add(new Location(location, npc));
         });            
@@ -83,14 +80,14 @@ public class GameEngine
 
     public void CreateNPC()
     {         
-        _npcs.Add(new NPC(TextGame.npcName0, TextGame.npcDescription0));                        
+        _npcs.Add(new NPC(NPCData.npcName0, NPCData.npcDescription0));                        
     }
 
     public void CreateBoss()
     {
-        Enumerable.Range(1, 3).ToList().ForEach(i =>
+        Enumerable.Range(Constants.NumberGameComponents.startPositionNPCBoss, Constants.NumberGameComponents.numberOfBoss).ToList().ForEach(i =>
         {
-            var npcInfo = GameInfo.GetBossInfo(i);
+            var npcInfo = GameData.GetBossInfo(i);
 
             _npcs.Add(new BossNPC(npcInfo.Name, npcInfo.Description, Types.Weapon));
             _bossWeakness.Add(Types.Weapon);                
@@ -119,9 +116,9 @@ public class GameEngine
 
     public void CreateItems()
     {
-        Enumerable.Range(0, 7).ToList().ForEach(i =>
+        Enumerable.Range(0, Constants.NumberGameComponents.numberOfItems).ToList().ForEach(i =>
         {
-            var ItemInfo = GameInfo.GetItemInfo(i);
+            var ItemInfo = GameData.GetItemInfo(i);
 
             _items.Add(new Item(ItemInfo.Name, ItemInfo.Description, Types.Weapon));
         });
@@ -149,7 +146,7 @@ public class GameEngine
 
     private int IteractionNPC(int level)
     {
-        InfoGame question = GameInfo.GetQuestions(level);
+        InfoGame question = GameData.GetQuestions(level);
         string ask = AnsiConsoleG.AskPlayer(question.Name);
         CheckAnswer(ask, question.Description, level);
         Player1.GetPlayerDecisions();
@@ -198,7 +195,7 @@ public class GameEngine
 
     private int GetBossNumber(string bossName)
     {
-        Dictionary<int, string> levels = GameInfo.GetBossNumber();
+        Dictionary<int, string> levels = GameData.GetBossNumber();
 
         return levels.FirstOrDefault(x => x.Value == bossName).Key;
     }

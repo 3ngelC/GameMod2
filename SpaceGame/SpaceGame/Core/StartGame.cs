@@ -1,23 +1,25 @@
-﻿namespace SpaceGame.Core;
+﻿using SpaceGame.Constants;
+
+namespace SpaceGame.Core;
 
 public class StartGame
 {
     public static void StartSpaceGame()
     {
-        var player = GameInfo.GameIntroduction();
-        var startGame = new GameEngine(player);
-        int level = 0;
+        var player = GameData.GameIntroduction();
+        var startGame = new GameEngine(player);        
         startGame.StartGameNPCandItems();
-        bool game = true;
+        bool runningGame = true;
+        int level = Constants.NumberGameComponents.startLevel;
 
-        while (game)
+        while (runningGame)
         {
             startGame.DisplayLocation(level);
             level = startGame.IteractionPlayerWithNPC(level);
-            if (level == 13)
+            if (level == Constants.NumberGameComponents.endLevel)
             {
                 AnsiConsoleGame.AnsiConsoleG.GetFinalDescription();
-                game = false;
+                runningGame = false;
             }
         }
     }    

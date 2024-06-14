@@ -25,19 +25,19 @@ public class AnsiConsoleG
     {
         AnsiConsole.MarkupLine($"\n[green]-------------Location: {text}--------------------[/]\n");
         
-    }
+    }    
 
     public static void GetBossDescription(Location locationInfo, INPC boss)
     {
-        AnsiConsole.MarkupLine($"\n[green]-------------Location: {locationInfo.NameLocation}--------------------[/]\n");
+        AnsiConsole.MarkupLine($"\n[yellow]-------------Location: {locationInfo.NameLocation}--------------------[/]\n");
         AnsiConsole.MarkupLine($"Name:[blue] {boss.Name}[/]\n");
         AnsiConsole.MarkupLine($"[cyan]Description: {boss.Description}[/]\n\n\n");
     }
 
     public static void GetNPCInstruction(Location locationInfo)
     {
-        AnsiConsole.MarkupLine($"\n[green]-------------Location: {locationInfo.NameLocation}--------------------[/]\n");
-        AnsiConsole.MarkupLine($"\n[green]it would be best if you had the answer to the following question...[/]\n");
+        AnsiConsole.MarkupLine($"\n[yellow]-------------Location: {locationInfo.NameLocation}--------------------[/]\n");
+        AnsiConsole.MarkupLine($"\n[green]to open the box of this level please answer the next question...[/]\n");
     }
 
     public static string GetPlayerInfo()
@@ -119,8 +119,8 @@ public class AnsiConsoleG
     public static void GetFinalDescription()
     {
         AnsiConsole.Clear();
-        AnsiConsole.MarkupLine($"[green]{TextGame.finalDescription}[/]");
+        AnsiConsole.MarkupLine($"[green]{FinalGameData.finalDescription}[/]");
         WaitingForPlayer();
-        AnsiConsole.WriteLine(TextGame.finalMessage);
+        AnsiConsole.WriteLine(FinalGameData.finalMessage);
     }
 }
